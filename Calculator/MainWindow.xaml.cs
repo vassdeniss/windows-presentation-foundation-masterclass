@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Calculator
 {
@@ -39,28 +27,7 @@ namespace Calculator
 
         private void NumberButton_Click(object sender, RoutedEventArgs e)
         {
-            int value = 0;
-
-            if (sender == this.zeroButton)
-                value = 0;
-            if (sender == this.oneButton)
-                value = 1;
-            if (sender == this.twoButton)
-                value = 2;
-            if (sender == this.threeButton)
-                value = 3;
-            if (sender == this.fourButton)
-                value = 4;
-            if (sender == this.fiveButton)
-                value = 5;
-            if (sender == this.sixButton)
-                value = 6;
-            if (sender == this.sevenButton)
-                value = 7;
-            if (sender == this.eightButton)
-                value = 8;
-            if (sender == this.nineButton)
-                value = 9;
+            string value = (sender as Button)!.Content.ToString()!;
 
             if (this.resultLabel.Content.ToString() == "0")
             {
@@ -92,6 +59,8 @@ namespace Calculator
         private void AcButton_Click(object sender, RoutedEventArgs e)
         {
             this.resultLabel.Content = "0";
+            this.lastNumber = 0;
+            this.result = 0;
         }
 
         private void NegativeButton_Click(object sender, RoutedEventArgs e)
@@ -105,16 +74,23 @@ namespace Calculator
 
         private void PercentButton_Click(object sender, RoutedEventArgs e)
         {
-            if (double.TryParse(this.resultLabel.Content.ToString(), out this.lastNumber))
+            if (double.TryParse(this.resultLabel.Content.ToString(), out double tempNumber))
             {
-                this.lastNumber /= 100;
-                this.resultLabel.Content = this.lastNumber.ToString();
+                tempNumber /= 100;
+
+                if (this.lastNumber != 0)
+                {
+                    tempNumber *= this.lastNumber;
+                }
+
+
+                this.resultLabel.Content = tempNumber.ToString();
             }
         }
 
         private void DotButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!this.resultLabel.Content.ToString().Contains('.'))
+            if (!this.resultLabel.Content.ToString()!.Contains('.'))
             {
                 this.resultLabel.Content += ".";
             }
@@ -127,21 +103,41 @@ namespace Calculator
                 switch (this.currentOperator)
                 {
                     case Operator.Addition:
-                        this.result = this.lastNumber + newNumber;
+                        this.result = this.Add(this.lastNumber, newNumber);
                         break;
                     case Operator.Subtraction:
-                        this.result = this.lastNumber - newNumber;
+                        this.result = this.Subtract(this.lastNumber, newNumber);
                         break;
                     case Operator.Multiplication:
-                        this.result = this.lastNumber * newNumber;
+                        this.result = this.Multiply(this.lastNumber, newNumber);
                         break;
                     case Operator.Division:
-                        this.result = this.lastNumber / newNumber;
+                        this.result = this.Division(this.lastNumber, newNumber);
                         break;
                 }
 
                 this.resultLabel.Content = this.result.ToString();
             }
+        }
+
+        private double Add(double numberOne, double numberTwo) => numberOne + numberTwo;
+
+        private double Subtract(double numberOne, double numberTwo) => numberOne - numberTwo;
+
+        private double Multiply(double numberOne, double numberTwo) => numberOne * numberTwo;
+
+        private double Division(double numberOne, double numberTwo)
+        {
+            if (numberTwo == 0)
+            {
+                MessageBox.Show("Division by 0 is not supported!",
+                                "Wrong operation!",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+                return 0;
+            }
+
+            return numberOne / numberTwo;
         }
     }
 }
