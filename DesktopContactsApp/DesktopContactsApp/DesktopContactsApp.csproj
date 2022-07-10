@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DesktopContactsApp.Data.Models\DesktopContactsApp.Data.Models.csproj" />
+    <ProjectReference Include="..\DesktopContactsApp.Data\DesktopContactsApp.Data.csproj" />
+  </ItemGroup>
+
+</Project>
