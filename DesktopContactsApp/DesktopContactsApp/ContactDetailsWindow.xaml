@@ -3,21 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DesktopContactsApp"
         mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
         Title="Contact Details" Height="250" Width="300">
     <Grid>
         <StackPanel Margin="10">
-            <Label Content="Name:"
-                   Margin="-5 -10 0 0"/>
+            <TextBlock Text="Name:"/>
             <TextBox x:Name="nameTextBox"
                      Margin="0 0 0 5"/>
-            <Label Content="Email:"
-                   Margin="-5 0 0 0"/>
+            <TextBlock Text="Email:"/>
             <TextBox x:Name="emailTextBox"
                      Margin="0 0 0 5"/>
-            <Label Content="Phone Number:"
-                   Margin="-5 0 0 0"/>
+            <TextBlock Text="Phone Number:"/>
             <TextBox x:Name="phoneTextBox"
                      Margin="0 0 0 5"/>
             <Button x:Name="updateButton"
@@ -27,10 +25,14 @@
                     Background="DarkGreen"
                     Click="UpdateButton_Click"/>
             <Button x:Name="deleteButton"
+                    Margin="0 0 0 5"
                     Content="Delete"
                     Foreground="White"
                     Background="Red"
                     Click="DeleteButton_Click"/>
+            <Button x:Name="CancelButton"
+                    Content="Cancel"
+                    Click="CancelButton_Click"/>
         </StackPanel>
     </Grid>
 </Window>

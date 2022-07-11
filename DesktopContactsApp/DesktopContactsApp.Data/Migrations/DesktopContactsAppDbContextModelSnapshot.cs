@@ -46,6 +46,24 @@ namespace DesktopContactsApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Contacts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "vassdeniss@gmail.com",
+                            IsDeleted = false,
+                            Name = "Denis",
+                            PhoneNumber = "+359882703944"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "andrej03@gmail.com",
+                            IsDeleted = false,
+                            Name = "Andrej",
+                            PhoneNumber = "+421233527657"
+                        });
                 });
 #pragma warning restore 612, 618
         }

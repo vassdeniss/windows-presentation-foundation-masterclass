@@ -17,6 +17,9 @@ namespace DesktopContactsApp
         {
             this.InitializeComponent();
 
+            this.Owner = Application.Current.MainWindow;
+            this.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
             this.contact = contact;
 
             this.nameTextBox.Text = this.contact.Name;
@@ -55,6 +58,11 @@ namespace DesktopContactsApp
                 context.SaveChanges();
             }
 
+            this.Close();
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
             this.Close();
         }
     }

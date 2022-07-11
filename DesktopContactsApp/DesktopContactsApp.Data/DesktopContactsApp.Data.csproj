@@ -17,4 +17,8 @@
     <ProjectReference Include="..\DesktopContactsApp.Data.Models\DesktopContactsApp.Data.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

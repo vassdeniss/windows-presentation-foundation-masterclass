@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DesktopContactsApp.Data.Migrations
 {
     [DbContext(typeof(DesktopContactsAppDbContext))]
-    [Migration("20220710190814_InitialMigration")]
+    [Migration("20220710210025_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,9 @@ namespace DesktopContactsApp.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -45,6 +48,24 @@ namespace DesktopContactsApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Contacts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "vassdeniss@gmail.com",
+                            IsDeleted = false,
+                            Name = "Denis",
+                            PhoneNumber = "+359882703944"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "andrej03@gmail.com",
+                            IsDeleted = false,
+                            Name = "Andrej",
+                            PhoneNumber = "+421233527657"
+                        });
                 });
 #pragma warning restore 612, 618
         }

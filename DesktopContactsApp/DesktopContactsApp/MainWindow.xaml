@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DesktopContactsApp"
+        xmlns:uc="clr-namespace:DesktopContactsApp.Controls;assembly=DesktopContactsApp.Controls"
         mc:Ignorable="d"
         Title="Desktop Contacts App" Height="450" Width="450">
     <Grid>
@@ -11,8 +11,8 @@
             <Button x:Name="newContactButton"
                     Content="New Contact"
                     Click="NewContactButton_Click"/>
-            <Label Content="Type here to filter by name:"
-                   Margin="-5 5 0 -6"/>
+            <TextBlock Text="Type here to filter by name:"
+                       Margin="0 5 0 0"/>
             <TextBox x:Name="filterTextBox"
                      Margin="0 5 0 0"
                      TextChanged="FilterTextBox_TextChanged"/>
@@ -20,17 +20,14 @@
                       Height="280"
                       Margin="0 5 0 0"
                       SelectionChanged="ContactsListView_SelectionChanged">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Name}"
-                                     FontSize="20"
-                                     FontWeight="Bold"/>
-                            <TextBlock Text="{Binding Email}"
-                                     Foreground="ForestGreen"/>
-                            <TextBlock Text="{Binding PhoneNumber}"
-                                     FontStyle="Italic"/>
-                        </StackPanel>
+                        <uc:ContactsControl Contact="{Binding}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
